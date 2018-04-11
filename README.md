@@ -1,11 +1,13 @@
 
 # contact-form
 
-Get started with [create-react-app](https://github.com/facebookincubator/create-react-app) and your own [express](https://expressjs.com/) server for development and production.
+Built with [create-react-app](https://github.com/facebookincubator/create-react-app) and [express](https://expressjs.com/) server for development.  Optimized for Heroku deployment.
 
 ## Features
 
 - Uses Nodemailer to send email with a gmail account.
+- React-materialize for UI elements and grid.
+- React-sweetalert for email success/failure message.
 
 ## Prerequisites
 
