@@ -16,13 +16,11 @@ Built with [create-react-app](https://github.com/facebookincubator/create-react-
 
 ## Installing
 
-First of all, you should install `create-express-react` via npm as a global package, this is the CLI to generate the template for you to get started.
-
 ```
-npm install && cd frontend && npm install
+npm install && cd frontend && npm install && cd ..
 ```
 
-Enter gmail account and base64 encoded password in /server/config/env.js
+Enter gmail account and base64 encoded password in /server/config/env.js. Then...
 
 ```
 npm run build
