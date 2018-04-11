@@ -1,0 +1,60 @@
+{
+  "name": "create-express-react",
+  "version": "1.0.2",
+  "description": "create template for create-react-app and express",
+  "scripts": {
+    "setup": "create-react-app frontend && npm run addProxy",
+    "start": "concurrently -k \"npm run dev\" \"npm run react\"",
+    "test-server": "jest",
+    "test-react": "cd frontend && npm test",
+    "lint": "eslint ./server/**/*.js",
+    "build": "rm -rf dist && npm run buildServer && npm run buildReact",
+    "deploy": "pm2 start deploy.json",
+    "dev": "NODE_ENV=dev nodemon -e js ./server/index.js --exec babel-node --presets es2015,stage-2 --ignore ./server/__test__/ --ignore ./frontend/ --ignore ./scripts/",
+    "prod": "NODE_ENV=production nodemon -e js ./server/index.js --exec babel-node --presets es2015,stage-2 --ignore ./server/__test__/ --ignore ./frontend/ --ignore ./scripts/",
+    "buildServer": "babel ./server -s -D -d dist",
+    "buildReact": "cd frontend && npm run build && mv build ../dist/public",
+    "react": "node ./scripts/reactDev",
+    "addProxy": "node ./scripts/addProxy",
+    "heroku-postbuild": "cd frontend/ && npm install --only=dev && npm install && npm run build"
+  },
+  "keywords": [
+    "react",
+    "express",
+    "javascript",
+    "full-stack",
+    "template",
+    "node"
+  ],
+  "author": "Haochuan Liu<haochuan.liu@gmail.com>(https://haochuan.io)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.7.0",
+    "express": "^4.15.3",
+    "helmet": "^3.8.0",
+    "morgan": "^1.8.2",
+    "nodemailer": "^4.6.4",
+    "serve-favicon": "^2.4.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chalk": "^2.1.0",
+    "concurrently": "^3.5.0",
+    "create-react-app": "^1.3.3",
+    "eslint": "^4.3.0",
+    "jest": "^20.0.4",
+    "nodemon": "^1.12.1",
+    "react-script": "^2.0.5"
+  },
+  "jest": {
+    "verbose": true,
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "frontend",
+      "dist"
+    ]
+  }
+}
