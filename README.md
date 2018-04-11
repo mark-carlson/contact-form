@@ -26,6 +26,8 @@ Enter gmail account and base64 encoded password in /server/config/env.js. Then..
 npm run build
 ```
 
+To authorize gmail access from Heroku, visit this site after deployment:  [http://www.google.com/accounts/DisplayUnlockCaptcha](http://www.google.com/accounts/DisplayUnlockCaptcha)
+
 ## Communication
 
 ### Dev
