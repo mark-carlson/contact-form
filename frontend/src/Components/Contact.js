@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Card, Col, Input, Preloader, Row } from 'react-materialize';
+import { Button, Card, Col, Input, Preloader, Row, Icon } from 'react-materialize';
 import SweetAlert from 'sweetalert-react'
 import 'sweetalert/dist/sweetalert.css';
 import './Contact.css';
@@ -30,6 +30,7 @@ export class Contact extends Component {
     }
 
     sendForm = () => {
+        const { email, subject, body } = this.state;
         this.setState({
             isSending: true
         });
@@ -41,9 +42,9 @@ export class Contact extends Component {
             },
             method: 'post',
             body: JSON.stringify({
-                email: this.state.email,
-                subject: this.state.subject,
-                body: this.state.body
+                email,
+                subject,
+                body
             })
         }).then((res) => {
             if (res.status === 503) {
@@ -74,14 +75,20 @@ export class Contact extends Component {
     buttonContent = () => {
         if (this.state.isSending) {
             return (
-                <Preloader size="small" />
+                    <Preloader small />
             )
         } else {
-            return 'Send';
+            return (
+                <div>
+                    <Icon right>send</Icon>
+                    <span>Send</span>
+                </div>
+            );
         }
     }
 
     render() {
+        const { body, email, emailValid, isSending, isSent, sendFailure, sendSuccessful, subject } = this.state;
         return (
             <Row>
                 <Col s={12} m={6} offset="m3">
@@ -91,18 +98,18 @@ export class Contact extends Component {
                         title="Email Form"
                         >
                             <Input
-                                value={this.state.email}
+                                value={email}
                                 name="email"
                                 type="email"
                                 s={12}
                                 label="Email Address"
                                 onChange={this.handleChange}
-                                className={(this.state.email.length &&
-                                !this.state.emailValid) ? 'invalid' : ''}
+                                className={(email.length &&
+                                !emailValid) ? 'invalid' : ''}
                                 autoComplete="off"
                             />
                             <Input
-                                value={this.state.subject}
+                                value={subject}
                                 name="subject"
                                 type="text"
                                 s={12}
@@ -111,7 +118,7 @@ export class Contact extends Component {
                                 autoComplete="off"
                             />
                             <Input
-                                value={this.state.body}
+                                value={body}
                                 name="body"
                                 type="textarea"
                                 s={12}
@@ -121,27 +128,28 @@ export class Contact extends Component {
                             />
                             <Button
                                 s={3}
+                                large
                                 wave='light'
-                                disabled={!this.state.email ||
-                                !this.state.subject ||
-                                !this.state.body ||
-                                !this.state.emailValid ||
-                                this.isSending ||
-                                this.isSent}
+                                disabled={!email ||
+                                !subject ||
+                                !body ||
+                                !emailValid ||
+                                isSending ||
+                                isSent}
                                 onClick={this.sendForm}
                             >
                             {this.buttonContent()}
                             </Button>
 
                             <SweetAlert
-                                show={this.state.sendSuccessful}
+                                show={sendSuccessful}
                                 type="success"
                                 title="Email Sent"
                                 text="Your email has been sent.  Thank you!"
                                 onConfirm={() => this.setState({ sendSuccessful: false})}
                             />
                             <SweetAlert
-                                show={this.state.sendFailure}
+                                show={sendFailure}
                                 type="error"
                                 title="Email Failed"
                                 text="Your email was not sent.  Please try again."

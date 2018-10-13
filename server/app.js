@@ -23,24 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // serve static files, this is for frontend React
 app.use('/static', express.static(path.join(__dirname, '../dist/public', 'static')));
 
-/*=====  End of Middleware  ======*/
-
-/*===========================================
-=            Baic Authentication            =
-===========================================*/
-
-// app.use(require('node-basicauth')({'haochuan': 'password'}));
-
-/*=====  End of Baic Authentication  ======*/
-
-/*===========================
-=            COR            =
-===========================*/
-
-// app.use(require('cors')());
-
-/*=====  End of COR  ======*/
-
 // Routes
 app.use('/api/v1', routes.api_v1);
 
