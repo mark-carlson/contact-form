@@ -25,5 +25,8 @@ env[process.env.NODE_ENV].GMAIL_USERNAME = '';
 //base64 encoded password (e.g. 'password' === 'cGFzc3dvcmQ=') See https://www.base64encode.org/
 env[process.env.NODE_ENV].ENCRYPTED_PASSWORD = '';
 
+// enter your website here:  e.g. 'markcarlson.io'
+env[process.env.NODE_ENV].SITE = '';
+
 
 export default env[process.env.NODE_ENV];

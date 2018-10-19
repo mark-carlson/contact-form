@@ -4,7 +4,16 @@
  *
  */
 const nodemailer = require('nodemailer');
-import env from '../config/env';
+// const env = require('../config/env');
+import env from '../config/env';//
+const fs = require('fs');
+const path = require("path");
+
+const elementMap = {
+  "subject": "SUBJECT",
+  "email": "FROM",
+  "body": "BODY"
+}
 
 export default function(req, res, next) {
   next();
@@ -20,12 +29,19 @@ export const sendMailFromGmail = (req, res, next) => {
     }
   });
 
+  let htmlTemplate = fs.readFileSync(path.resolve(__dirname, '../templates/email.html'), 'UTF-8');
+  for (const key in elementMap) {
+    htmlTemplate = htmlTemplate.replace(new RegExp(`__${elementMap[key]}__`, 'g'), req.body[key]);
+  }
+  htmlTemplate = htmlTemplate.replace(new RegExp(`__SITE__`, 'g'), env.SITE);
+
   const mailOptions = {
     from: env.GMAIL_USERNAME,
     replyTo: req.body.email,
     to: env.GMAIL_USERNAME,
     subject: `Web Contact: ${req.body.subject}`,
-    text: req.body.body
+    text: req.body.body,
+    html: htmlTemplate
   };
 
   transporter.sendMail(mailOptions, function(error, info){

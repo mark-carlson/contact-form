@@ -12,7 +12,6 @@ export class Contact extends Component {
         sendSuccessful: false,
         sendFailure: false,
         emailValid: false,
-        isSent: false,
         isSending: false
     }
 
@@ -50,7 +49,6 @@ export class Contact extends Component {
             if (res.status === 503) {
                 this.setState({
                     sendSuccessful: false,
-                    isSent: false,
                     isSending: false,
                     sendFailure: true
                 });
@@ -64,7 +62,6 @@ export class Contact extends Component {
                     email: '',
                     subject: '',
                     body: '',
-                    isSent: true,
                     isSending: false,
                     emailValid: false
                 });
@@ -88,7 +85,7 @@ export class Contact extends Component {
     }
 
     render() {
-        const { body, email, emailValid, isSending, isSent, sendFailure, sendSuccessful, subject } = this.state;
+        const { body, email, emailValid, isSending, sendFailure, sendSuccessful, subject } = this.state;
         return (
             <Row>
                 <Col s={12} m={6} offset="m3">
@@ -134,8 +131,7 @@ export class Contact extends Component {
                                 !subject ||
                                 !body ||
                                 !emailValid ||
-                                isSending ||
-                                isSent}
+                                isSending}
                                 onClick={this.sendForm}
                             >
                             {this.buttonContent()}
