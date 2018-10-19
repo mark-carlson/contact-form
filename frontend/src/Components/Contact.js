@@ -9,6 +9,7 @@ export class Contact extends Component {
         email: '',
         subject: '',
         body: '',
+        copy: false,
         sendSuccessful: false,
         sendFailure: false,
         emailValid: false,
@@ -23,13 +24,18 @@ export class Contact extends Component {
                 emailValid
             });
         }
+        if (name === 'copy') {
+            return this.setState({
+                copy: !this.state.copy
+            });
+        }
         this.setState({
             [name]: value
         });
     }
 
     sendForm = () => {
-        const { email, subject, body } = this.state;
+        const { body, copy, email, subject } = this.state;
         this.setState({
             isSending: true
         });
@@ -42,6 +48,7 @@ export class Contact extends Component {
             method: 'post',
             body: JSON.stringify({
                 email,
+                copy,
                 subject,
                 body
             })
@@ -62,6 +69,7 @@ export class Contact extends Component {
                     email: '',
                     subject: '',
                     body: '',
+                    copy: false,
                     isSending: false,
                     emailValid: false
                 });
@@ -85,7 +93,7 @@ export class Contact extends Component {
     }
 
     render() {
-        const { body, email, emailValid, isSending, sendFailure, sendSuccessful, subject } = this.state;
+        const { body, copy, email, emailValid, isSending, sendFailure, sendSuccessful, subject } = this.state;
         return (
             <Row>
                 <Col s={12} m={6} offset="m3">
@@ -94,48 +102,68 @@ export class Contact extends Component {
                         textClassName="grey-text"
                         title="Email Form"
                         >
-                            <Input
-                                value={email}
-                                name="email"
-                                type="email"
-                                s={12}
-                                label="Email Address"
-                                onChange={this.handleChange}
-                                className={(email.length &&
-                                !emailValid) ? 'invalid' : ''}
-                                autoComplete="off"
-                            />
-                            <Input
-                                value={subject}
-                                name="subject"
-                                type="text"
-                                s={12}
-                                label="Subject"
-                                onChange={this.handleChange}
-                                autoComplete="off"
-                            />
-                            <Input
-                                value={body}
-                                name="body"
-                                type="textarea"
-                                s={12}
-                                label="Message"
-                                onChange={this.handleChange}
-                                height="300px"
-                            />
-                            <Button
-                                s={3}
-                                large
-                                wave='light'
-                                disabled={!email ||
-                                !subject ||
-                                !body ||
-                                !emailValid ||
-                                isSending}
-                                onClick={this.sendForm}
-                            >
-                            {this.buttonContent()}
-                            </Button>
+                            <Row>
+                                <Input
+                                    value={email}
+                                    name="email"
+                                    type="email"
+                                    s={12}
+                                    label="Email Address"
+                                    onChange={this.handleChange}
+                                    className={(email.length &&
+                                    !emailValid) ? 'invalid' : ''}
+                                    autoComplete="off"
+                                />
+                            </Row>
+                            <Row>
+                                <Input
+                                    value={subject}
+                                    name="subject"
+                                    type="text"
+                                    s={12}
+                                    label="Subject"
+                                    onChange={this.handleChange}
+                                    autoComplete="off"
+                                />
+                            </Row>
+                            <Row>
+                                <Input
+                                    value={body}
+                                    name="body"
+                                    type="textarea"
+                                    s={12}
+                                    label="Message"
+                                    onChange={this.handleChange}
+                                    height="300px"
+                                />
+                            </Row>
+                            <Row>
+                                <Input
+                                    checked={(copy) ? 'checked': false}
+                                    name="copy"
+                                    id="copy"
+                                    type="checkbox"
+                                    label="Send a copy to you?"
+                                    onChange={this.handleChange}
+                                    s={12}
+                                />
+                            </Row>
+                            <Row>
+                                <Button
+                                    s={3}
+                                    large
+                                    wave='light'
+                                    disabled={!email ||
+                                    !subject ||
+                                    !body ||
+                                    !emailValid ||
+                                    isSending}
+                                    onClick={this.sendForm}
+                                >
+                                {this.buttonContent()}
+                                </Button>
+                            </Row>
+
 
                             <SweetAlert
                                 show={sendSuccessful}

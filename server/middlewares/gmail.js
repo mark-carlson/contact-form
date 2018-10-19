@@ -35,10 +35,15 @@ export const sendMailFromGmail = (req, res, next) => {
   }
   htmlTemplate = htmlTemplate.replace(new RegExp(`__SITE__`, 'g'), env.SITE);
 
+  const sendTo = [env.GMAIL_USERNAME];
+  if (req.body.copy) {
+    sendTo.push(req.body.email);
+  }
+
   const mailOptions = {
     from: env.GMAIL_USERNAME,
     replyTo: req.body.email,
-    to: env.GMAIL_USERNAME,
+    to: sendTo,
     subject: `Web Contact: ${req.body.subject}`,
     text: req.body.body,
     html: htmlTemplate
