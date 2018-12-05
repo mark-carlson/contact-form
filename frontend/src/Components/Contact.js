@@ -139,7 +139,7 @@ export class Contact extends Component {
                             </Row>
                             <Row>
                                 <Input
-                                    checked={(copy) ? 'checked': false}
+                                    checked={copy}
                                     name="copy"
                                     id="copy"
                                     type="checkbox"
