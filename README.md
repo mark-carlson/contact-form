@@ -15,6 +15,7 @@ Built with [create-react-app](https://github.com/facebookincubator/create-react-
 
 ## Installing
 
+
 ```
 npm install && cd frontend && npm install && cd ..
 ```
@@ -24,6 +25,15 @@ Enter gmail account and base64 encoded password in /server/config/env.js. Then..
 ```
 npm run build
 ```
+
+NOTE:  Windows users may need to change their root `package.json` line:
+
+```"dev": "NODE_ENV=dev nodemon``` to ```"dev": "SET NODE_ENV=dev&& nodemon```
+
+and
+
+```"prod": "NODE_ENV=production nodemon``` to ```"prod": "SET NODE_ENV=production&& nodemon```
+
 
 To authorize gmail access from Heroku, visit this site after deployment: [http://www.google.com/accounts/DisplayUnlockCaptcha](http://www.google.com/accounts/DisplayUnlockCaptcha)
 
