@@ -1,0 +1,50 @@
+<mjml>
+
+  <mj-head>
+
+    <mj-attributes>
+      <mj-class name="header-text" font-size="50px" />
+      <mj-font name="Ubuntu" href="https://fonts.googleapis.com/css?family=Ubuntu" />
+    </mj-attributes>
+  </mj-head>
+
+  <mj-body background-color="#eee" font-family="Ubuntu">
+
+        <mj-hero background-url="https://cdn.pixabay.com/photo/2017/05/31/23/44/email-marketing-2362038_1280.png" height="200px" >
+     <mj-text mj-class="header-text" align="center">
+      You've Got Mail
+     </mj-text>
+    </mj-hero>
+
+    <mj-section background-color="#fff">
+
+      <mj-column>
+        <mj-text align="center" font-weight="bold" font-size="18px">
+          __SUBJECT__
+        </mj-text>
+        <mj-text font-size="18px">
+          __FROM__
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#fff">
+      <mj-column>
+        <mj-text font-size="18px">
+          __BODY__
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+
+  <mj-column>
+    <mj-text font-size="14px">
+      Sent from <a href="http://__SITE__">__SITE__</a>
+    </mj-text>
+  </mj-column>
+
+</mj-section>
+
+  </mj-body>
+
+</mjml>
