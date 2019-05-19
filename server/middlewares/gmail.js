@@ -20,7 +20,7 @@ export default function(req, res, next) {
 }
 
 export const sendMailFromGmail = (req, res, next) => {
-  const buff = new Buffer(env.ENCRYPTED_PASSWORD, 'base64');
+  const buff = new Buffer.from(env.ENCRYPTED_PASSWORD, 'base64');
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
